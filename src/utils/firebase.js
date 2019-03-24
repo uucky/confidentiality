@@ -9,9 +9,9 @@ firebase.initializeApp(config);
 const db = firebase.firestore();
 
 // firebase collections
-const guestsCollection = db.collection('guests');
+const guestCollection = db.collection('guest');
 
 export {
   db,
-  guestsCollection,
+  guestCollection,
 };

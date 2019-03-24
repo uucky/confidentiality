@@ -2,7 +2,7 @@
   <button @click="fetchCol">Clickme</button>
 </template>
 <script>
-import { guestsCollection } from '../utils/firebase';
+import { guestCollection } from '../utils/firebase';
 
 export default {
   data() {
@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     fetchCol() {
-      guestsCollection.get().then((querySnapshot) => {
+      guestCollection.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           this.guests.push(doc.data());
         });
