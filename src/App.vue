@@ -1,31 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <GuestView />
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <FirstPage />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
-import GuestView from './components/GuestView.vue';
-
+import FirstPage from './FirstPage';
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    HelloWorld,
-    GuestView,
+    FirstPage,
   },
 };
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<!-- <style src="@/assets/tailwind.css"></style> -->
+<style scoped lang="postcss">
 </style>
