@@ -34,6 +34,10 @@
   color: white;
 }
 
+.underlined{
+  text-decoration: underline;
+}
+
 /* .title {
   @apply block w-full text-accent;
   font-family: 'Palanquin Dark', system-ui;
