@@ -8,10 +8,12 @@
       <button
         type="button"
         class="btn-regular"
+        @click="submitData"
       >
-        Start
+        Submit
       </button>
     </div>
+    {{ state }}
     <section class="footnote-container">
       <p class="footnote">
         By clicking Start, you agree to our <span class="underlined">Terms, Data and Cookies Policy</span>.
@@ -20,6 +22,31 @@
   </div>
 </template>
 <script>
+import { guestCollection } from './utils/firebase';
+
+export default {
+  name: 'SubmitPage',
+  data() {
+    return {
+      state: 'ready',
+      error: null,
+    };
+  },
+  methods: {
+    async submitData() {
+      const { setNum, answers, uid } = this.$store.state;
+      try {
+        await guestCollection.add({
+          setNum, answers, uid,
+        });
+        this.state = 'success';
+      } catch (e) {
+        this.state = 'error';
+        this.error = e;
+      }
+    },
+  },
+};
 </script>
 <style scoped lang="postcss">
 .title {

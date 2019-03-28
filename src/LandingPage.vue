@@ -1,6 +1,8 @@
 <template>
   <div class="layout">
-    <h1 class="title">Take our survey.</h1>
+    <h1 class="title">
+      Take our survey.
+    </h1>
     <p class="description">
       If you take our beautiful cute survey we will give you some fresh treats! Please ask our staff for detail. We need to fill more sentences here so these.
     </p>
@@ -8,19 +10,54 @@
       <button
         type="button"
         class="btn-regular"
+        @click="startQuestion"
       >
         Start
       </button>
     </div>
+    {{ status }}
     <section class="footnote-container">
       <p class="footnote">
-        By clicking Start, you agree to our <span class="underlined">Terms, Data and Cookies Policy</span>.
-        <router-link to="/PolicyPage">POLICY</router-link>
-      </p><router-view />
+        By clicking Start, you agree to our
+        <router-link to="/PolicyPage">
+          <span class="underlined">Terms, Data and Cookies Policy</span>.
+        </router-link>
+      </p>
     </section>
   </div>
 </template>
 <script>
+import { auth } from './utils/firebase';
+
+export default {
+  name: 'Landing',
+  data() {
+    return {
+      status: 'ready',
+      error: null,
+      loggedIn: false,
+    };
+  },
+  methods: {
+    async startQuestion() {
+      try {
+        await auth.signInAnonymously();
+        this.loggedIn = true;
+        auth.onAuthStateChanged((user) => {
+          if (user) {
+            this.$store.commit('SET_UID', { uid: user.uid });
+          } else {
+            throw new Error('not logged in');
+          }
+        });
+        this.$router.push({ path: '/question' });
+      } catch (e) {
+        this.status = 'error';
+        this.error = e.message;
+      }
+    },
+  },
+};
 </script>
 <style scoped lang="postcss">
 .title {

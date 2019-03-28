@@ -11,7 +11,10 @@ const db = firebase.firestore();
 // firebase collections
 const guestCollection = db.collection('guest');
 
+const auth = firebase.auth();
+
 export {
   db,
   guestCollection,
+  auth,
 };
