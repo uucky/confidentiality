@@ -34,8 +34,14 @@
   color: white;
 }
 
-.underlined{
+.underlined {
   text-decoration: underline;
+}
+
+.question-text {
+  font-family: 'Work Sans', system-ui;
+  font-size: 1.5em;
+  @apply text-sub;
 }
 
 /* .title {
