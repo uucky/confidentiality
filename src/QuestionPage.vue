@@ -127,7 +127,7 @@ export default {
 
 
 .textInput {
-  margin: 1em 0;
+  margin: 50% 0 1em 0;
   width: 100%;
   font-family: 'Work Sans', system-ui;
   outline: none;
