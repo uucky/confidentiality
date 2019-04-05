@@ -25,6 +25,10 @@ const set2 = {
       d: 'Winter',
     },
   },
+  q4: {
+    question: 'I think_______should pay for a first date.',
+    type: TEXT,
+  },
 };
 
 export default set2;

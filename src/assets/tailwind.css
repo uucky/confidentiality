@@ -16,12 +16,25 @@
   font-size: 1.125em;
   box-shadow: 0 .25rem .5rem rgba(0, 0, 0, 0.1);
   border-radius: .375rem;
+  
+  &:disabled {
+    @apply bg-blue-lighter;
+  }
 }
 
 .btn-regular-inverted {
   @apply btn-regular;
   @apply bg-white;
   color: #3F80F2;
+}
+
+.btn-regular-submit {
+  @apply btn-regular;
+  background: linear-gradient(to right, #04EFFE, #0A98FF);
+  
+  &:disabled {
+    background: linear-gradient(to right, #ccfbfe, #ceeaff);
+  }
 }
 
 .footnote {
