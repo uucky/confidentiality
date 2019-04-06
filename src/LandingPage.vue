@@ -10,12 +10,14 @@
       <button
         type="button"
         class="btn-regular"
-        @click="startQuestion"
+        @click="startLogin"
       >
         Start
       </button>
     </div>
-    {{ status }}
+    <RandomFruit
+      v-if="started"
+    />
     <section class="footnote-container">
       <p class="footnote">
         By clicking Start, you agree to our
@@ -27,34 +29,24 @@
   </div>
 </template>
 <script>
-import { auth } from './utils/firebase';
+import RandomFruit from './components/RandomFruit';
 
 export default {
   name: 'Landing',
+  components: {
+    RandomFruit,
+  },
   data() {
     return {
       status: 'ready',
       error: null,
       loggedIn: false,
+      started: false,
     };
   },
   methods: {
-    async startQuestion() {
-      try {
-        await auth.signInAnonymously();
-        this.loggedIn = true;
-        auth.onAuthStateChanged((user) => {
-          if (user) {
-            this.$store.commit('SET_UID', { uid: user.uid });
-          } else {
-            throw new Error('not logged in');
-          }
-        });
-        this.$router.push({ path: '/question' });
-      } catch (e) {
-        this.status = 'error';
-        this.error = e.message;
-      }
+    startLogin() {
+      this.started = true;
     },
   },
 };
@@ -88,8 +80,7 @@ export default {
 }
 
 .description {
-  @apply w-full;
-  color: #1A7AA4;
+  @apply w-full text-sub;
   font-size: 1em;
   font-family: 'Work Sans', system-ui;
   margin-bottom: 5.25em;

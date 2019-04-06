@@ -5,12 +5,16 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: () => ({
-    setNum: '2',
-    currentQuestion: 1,
+    questionSet: '',
+    currentQuestion: 0,
     answers: {},
     uid: '',
+    fruit: '',
   }),
   mutations: {
+    SET_FRUIT(state, { fruit }) {
+      state.fruit = fruit;
+    },
     INCR_QUESTIONNUM(state) {
       state.currentQuestion += 1;
     },
@@ -25,6 +29,9 @@ export default new Vuex.Store({
     },
     SET_UID(state, { uid }) {
       state.uid = uid;
+    },
+    SET_QUESTIONSET(state, { setNum }) {
+      state.questionSet = setNum;
     },
   },
   actions: {

@@ -5,7 +5,9 @@
         {{ currentQuestion }}</span>/<span class="questionsNum">{{ questionLength }}
       </span>
     </h1>
+    <SetSelection v-if="!questionSet" />
     <QuestionArea
+      v-if="!!questionSet"
       :question="activeQuestion.question"
       :question-length="questionLength"
       :question-type="activeQuestion.type"
@@ -16,28 +18,29 @@
 </template>
 <script>
 import QuestionArea from './components/questions';
+import SetSelection from './components/SetSelection';
 import questions from './questions';
 
 export default {
-  name: 'QuestionView',
+  name: 'QuestionPage',
   components: {
     QuestionArea,
-  },
-  props: {
-    setNum: {
-      type: Number,
-      default: 2,
-    },
+    SetSelection,
   },
   computed: {
+    questionSet() {
+      return this.$store.state.questionSet;
+    },
     currentQuestion() {
       return this.$store.state.currentQuestion;
     },
     activeQuestion() {
-      return questions[`set${this.setNum}`][`q${this.currentQuestion}`];
+      if (!this.questionSet) return {};
+      return questions[`set${this.questionSet}`][`q${this.currentQuestion}`];
     },
     questionLength() {
-      return Object.keys(questions[`set${this.setNum}`]).length;
+      if (!this.questionSet) return 15;
+      return Object.keys(questions[`set${this.questionSet}`]).length;
     },
   },
 };

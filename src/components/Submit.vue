@@ -3,9 +3,9 @@
     <p
       v-if="isSubmitting"
       class="submitStatus"
-      :class="{failure: state === 'failed'}"
+      :class="{failure: status === 'failed'}"
     >
-      {{ submitMsg[state] }}
+      {{ submitMsg[status] }}
       {{ error }}
     </p>
     <div
@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      state: 'ready',
+      status: 'ready',
       error: null,
       isSubmitting: false,
       submitMsg: {
@@ -56,16 +56,18 @@ export default {
     async submitData() {
       this.saveLastAnswer();
       this.isSubmitting = true;
-      this.state = 'submitting';
-      const { setNum, answers, uid } = this.$store.state;
+      this.status = 'submitting';
+      const {
+        questionSet, answers, uid, fruit,
+      } = this.$store.state;
       try {
         await guestCollection.add({
-          setNum, answers, uid,
+          questionSet, answers, uid, fruit,
         });
-        this.state = 'success';
+        this.status = 'success';
       } catch (e) {
-        this.state = 'failed';
-        this.error = e;
+        this.status = 'failed';
+        this.error = e.message;
       }
     },
   },
