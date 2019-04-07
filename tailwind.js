@@ -130,6 +130,7 @@ let colors = {
 
   'accent': '#28A0E3',
   'sub': '#1A7AA4',
+  'fb-blue': '#3B5998',
 }
 
 module.exports = {
