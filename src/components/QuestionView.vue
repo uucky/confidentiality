@@ -61,10 +61,10 @@
   </section>
 </template>
 <script>
-import Submit from '../Submit';
+import Submit from './Submit';
 
 export default {
-  name: 'QuestionArea',
+  name: 'QuestionView',
   components: {
     Submit,
   },
@@ -85,6 +85,10 @@ export default {
       type: Number,
       default: 1,
     },
+    isQuestionReal: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -101,7 +105,7 @@ export default {
   },
   methods: {
     nextQuestion() {
-      this.$store.commit('SET_THIS_ANSWER', { answer: this.answer });
+      if (this.isQuestionReal) this.$store.commit('SET_THIS_ANSWER', { answer: this.answer });
       this.answer = '';
       this.$store.commit('INCR_QUESTIONNUM');
       if (this.$store.state.currentQuestion === this.questionLength) {

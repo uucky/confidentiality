@@ -6,25 +6,26 @@
       </span>
     </h1>
     <SetSelection v-if="!questionSet" />
-    <QuestionArea
+    <QuestionView
       v-if="!!questionSet"
       :question="activeQuestion.question"
       :question-length="questionLength"
       :question-type="activeQuestion.type"
       :options="activeQuestion.options"
+      :is-question-real="!!activeQuestion.showcase"
       class="mainArea"
     />
   </div>
 </template>
 <script>
-import QuestionArea from './components/questions';
+import QuestionView from './components/QuestionView';
 import SetSelection from './components/SetSelection';
 import questions from './questions';
 
 export default {
   name: 'QuestionPage',
   components: {
-    QuestionArea,
+    QuestionView,
     SetSelection,
   },
   computed: {
@@ -42,6 +43,9 @@ export default {
       if (!this.questionSet) return 15;
       return Object.keys(questions[`set${this.questionSet}`]).length;
     },
+  },
+  mounted() {
+    if (!this.$store.state.fruit) this.$router.push('/');
   },
 };
 </script>

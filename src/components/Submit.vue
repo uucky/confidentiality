@@ -36,6 +36,10 @@ export default {
       type: String,
       default: '',
     },
+    questionIsReal: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -51,7 +55,7 @@ export default {
   },
   methods: {
     saveLastAnswer() {
-      this.$store.commit('SET_THIS_ANSWER', { answer: this.lastAnswer });
+      if (this.questionIsReal) this.$store.commit('SET_THIS_ANSWER', { answer: this.lastAnswer });
     },
     async submitData() {
       this.saveLastAnswer();
@@ -61,8 +65,9 @@ export default {
         questionSet, answers, uid, fruit,
       } = this.$store.state;
       try {
+        const timestamp = new Date();
         await guestCollection.add({
-          questionSet, answers, uid, fruit,
+          questionSet, answers, uid, fruit, timestamp,
         });
         this.status = 'success';
       } catch (e) {
