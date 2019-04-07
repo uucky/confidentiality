@@ -9,10 +9,12 @@ const questionGroupsSchema = Joi.object().pattern(
     /^q\d{1,2}$/, Joi.alternatives().try(
       Joi.object().keys({
         question: Joi.string().required(),
+        showcase: Joi.string(),
         type: TEXT,
       }),
       Joi.object().keys({
         question: Joi.string().required(),
+        showcase: Joi.string(),
         type: SELECT,
         options: Joi.object().pattern(
           /^[a-z]$/, Joi.string()
