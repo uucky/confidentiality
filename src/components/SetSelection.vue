@@ -1,6 +1,6 @@
 <template>
   <section>
-    <p class="question-text">
+    <p class="questionText">
       Please choose a survey category:
     </p>
     <div class="questionArea">
@@ -64,6 +64,12 @@ export default {
 .questionArea {
   display: flex;
   flex-flow: row wrap;
+}
+
+.questionText {
+  font-family: 'Work Sans', system-ui;
+  font-size: 1.5em;
+  @apply text-sub;
 }
 
 .textInput {

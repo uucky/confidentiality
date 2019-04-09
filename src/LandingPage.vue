@@ -21,7 +21,7 @@
     <section class="footnote-container">
       <p class="footnote">
         By clicking Start, you agree to our
-        <router-link to="/PolicyPage">
+        <router-link to="/policies">
           <span class="underlined">Terms, Data and Cookies Policy</span>.
         </router-link>
       </p>

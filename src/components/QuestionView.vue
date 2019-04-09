@@ -1,6 +1,6 @@
 <template>
   <section>
-    <p class="question-text">
+    <p class="questionText">
       {{ question }}
     </p>
     <div
@@ -119,6 +119,14 @@ export default {
 .questionArea {
   display: flex;
   flex-flow: row wrap;
+}
+
+.questionText {
+  /* max-width: 20em; */
+  /* overflow-wrap: break-word; */
+  font-family: 'Work Sans', system-ui;
+  font-size: 1.5em;
+  @apply text-sub;
 }
 
 .textInput {

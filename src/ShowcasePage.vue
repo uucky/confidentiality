@@ -38,8 +38,10 @@ export default {
       if (this.guests.length < 1) return {};
       return Object.keys(this.guests).map(guest => Object.keys(this.guests[guest].answers)
         .map((questionNum) => {
-          const showcaseTemplate = questions[`set${this.guests[guest].questionSet}`][`q${questionNum}`].showcase;
-          const message = showcaseTemplate.replace('<username>', this.guests[guest].fruit).replace('<blank>', this.guests[guest].answers[questionNum]);
+          const curQuestion = questions[`set${this.guests[guest].questionSet}`][`q${questionNum}`];
+          const showcaseTemplate = curQuestion.showcase;
+          const answer = curQuestion.type === 'text' ? this.guests[guest].answers[questionNum] : curQuestion.options[this.guests[guest].answers[questionNum]];
+          const message = showcaseTemplate.replace('<username>', this.guests[guest].fruit).replace('<blank>', answer);
           return {
             key: `${this.guests[guest].uid}-q${questionNum}`,
             message,

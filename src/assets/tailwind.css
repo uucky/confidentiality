@@ -50,13 +50,11 @@
 }
 
 .underlined {
+  @apply text-accent;
   text-decoration: underline;
-}
-
-.question-text {
-  font-family: 'Work Sans', system-ui;
-  font-size: 1.5em;
-  @apply text-sub;
+  &:visited {
+    @apply text-accent;
+  }
 }
 
 /* .title {
