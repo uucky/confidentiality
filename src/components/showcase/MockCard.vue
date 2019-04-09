@@ -1,22 +1,27 @@
 <template>
-  <div class="card">
-    <div class="firstRow">
-      <div class="avatar" />
-      <div class="rightPart">
-        <p class="username">
-          Said in Confidence
-        </p>
-        <p class="time">
-          {{ convertedTime }}
+  <transition name="list">
+    <div
+      v-show="timeFromNow.elapsed > 60000"
+      class="card"
+    >
+      <div class="firstRow">
+        <div class="avatar" />
+        <div class="rightPart">
+          <p class="username">
+            Said in Confidence
+          </p>
+          <p class="time">
+            {{ timeFromNow.formatted }}
+          </p>
+        </div>
+      </div>
+      <div class="secondRow">
+        <p class="message">
+          {{ message }}
         </p>
       </div>
     </div>
-    <div class="secondRow">
-      <p class="message">
-        {{ message }}
-      </p>
-    </div>
-  </div>
+  </transition>
 </template>
 <script>
 export default {
@@ -34,12 +39,25 @@ export default {
       }),
     },
   },
-  computed: {
-    convertedTime() {
-      const { seconds, nanoseconds } = this.timestamp;
-      const newDate = new Date(seconds * 1000 + nanoseconds / 1000);
-      return this.timeElapsed(newDate);
-    },
+  data() {
+    return {
+      timeFromNow: null,
+      polling: null,
+    };
+  },
+  // computed: {
+  //   convertedTime() {
+  //     const { seconds, nanoseconds } = this.timestamp;
+  //     const newDate = new Date(seconds * 1000 + nanoseconds / 1000);
+  //     return this.timeElapsed(newDate);
+  //   },
+  // },
+  created() {
+    this.getTimeFromNow();
+    this.polling = setInterval(() => this.getTimeFromNow(), 1000);
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
   },
   methods: {
     timeElapsed(origTime) {
@@ -61,7 +79,12 @@ export default {
         };
         formatted = origDate.toLocaleString('en-CA', options).replace(',', '');
       }
-      return formatted;
+      return { formatted, elapsed };
+    },
+    getTimeFromNow() {
+      const { seconds, nanoseconds } = this.timestamp;
+      const newDate = new Date(seconds * 1000 + nanoseconds / 1000000);
+      this.timeFromNow = this.timeElapsed(newDate);
     },
   },
 };
@@ -117,5 +140,14 @@ export default {
   padding: .5em 0 0;
   font-family: 'Helvetica', system-ui;
   font-size: 1.625em;
+}
+
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: translateY(-32.375em);
 }
 </style>
