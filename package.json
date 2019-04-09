@@ -4,7 +4,7 @@
   "license": "CC-BY-NC-SA-4.0",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --modern",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "validate": "babel-node src/questions/validator.js"
