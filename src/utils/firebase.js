@@ -9,12 +9,14 @@ firebase.initializeApp(config);
 const db = firebase.firestore();
 
 // firebase collections
-const guestCollection = db.collection('guest');
+const answerCollection = db.collection('answer');
+const fruitCollection = db.collection('fruit');
 
 const auth = firebase.auth();
 
 export {
   db,
-  guestCollection,
+  answerCollection,
+  fruitCollection,
   auth,
 };

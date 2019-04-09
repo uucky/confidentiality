@@ -4,8 +4,8 @@ import set3 from './set3';
 import set4 from './set4';
 import set5 from './set5';
 
-const TEXT = 'text';
-const SELECT = 'select';
+// const TEXT = 'text';
+// const SELECT = 'select';
 
 const questions = {
   set1,

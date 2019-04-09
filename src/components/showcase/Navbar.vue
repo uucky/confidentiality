@@ -19,7 +19,7 @@ export default {
 </script>
 <style lang="postcss" scoped>
 .navContainer {
-  @apply bg-fb-blue;
+  @apply bg-fb-blue z-20;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;

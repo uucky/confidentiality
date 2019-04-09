@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import { guestCollection } from '@/utils/firebase';
+import { answerCollection } from '@/utils/firebase';
 
 export default {
   name: 'Submit',
@@ -66,10 +66,12 @@ export default {
       } = this.$store.state;
       try {
         const timestamp = new Date();
-        await guestCollection.add({
+        await answerCollection.add({
           questionSet, answers, uid, fruit, timestamp,
         });
         this.status = 'success';
+        this.$store.commit('SET_ALLOWTOANSWER', { status: false });
+        this.$router.push('/result');
       } catch (e) {
         this.status = 'failed';
         this.error = e.message;

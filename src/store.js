@@ -10,6 +10,7 @@ export default new Vuex.Store({
     answers: {},
     uid: '',
     fruit: '',
+    allowToAnswer: false,
   }),
   mutations: {
     SET_FRUIT(state, { fruit }) {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     SET_QUESTIONSET(state, { setNum }) {
       state.questionSet = setNum;
+    },
+    SET_ALLOWTOANSWER(state, { status }) {
+      state.allowToAnswer = status;
     },
   },
   actions: {

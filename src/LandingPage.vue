@@ -6,13 +6,20 @@
     <p class="description">
       If you take our beautiful cute survey we will give you some fresh treats! Please ask our staff for detail. We need to fill more sentences here so these.
     </p>
+    <p
+      v-if="error"
+      class="errorStatus"
+    >
+      {{ error }}
+    </p>
     <div class="button-container">
       <button
         type="button"
         class="btn-regular"
+        :disabled="status === 'checking'"
         @click="startLogin"
       >
-        Start
+        {{ status === 'checking' ? 'Logging in...' : 'Start' }}
       </button>
     </div>
     <RandomFruit
@@ -30,6 +37,7 @@
 </template>
 <script>
 import RandomFruit from './components/RandomFruit';
+import { auth, answerCollection } from '@/utils/firebase';
 
 export default {
   name: 'Landing',
@@ -42,11 +50,45 @@ export default {
       error: null,
       loggedIn: false,
       started: false,
+      loginMsg: {
+        loggingIn: 'Logging in...',
+        failed: 'Bad Internet, try again?',
+        success: 'Successfully logged in.',
+      },
     };
   },
   methods: {
+    async checkLogin() {
+      try {
+        this.status = 'checking';
+        await auth.setPersistence('local');
+        await auth.signInAnonymously();
+        auth.onAuthStateChanged((user) => {
+          if (user) {
+            answerCollection.where('uid', '==', user.uid).get().then((querySnapshot) => {
+              this.status = 'ready';
+              if (querySnapshot.size > 1) throw new Error('Found more than one document.');
+              if (querySnapshot.size === 1) {
+                this.$store.commit('SET_FRUIT', { fruit: querySnapshot.docs[0].data().fruit });
+                this.$router.push({ path: '/result' });
+              } else {
+                // no doc found means no answer yet submitted
+                this.$store.commit('SET_UID', { uid: user.uid });
+                this.started = true;
+              }
+            });
+          } else {
+            this.status = 'ready';
+            this.error = 'Not logged in.';
+          }
+        });
+      } catch (e) {
+        this.status = 'ready';
+        this.error = e.message;
+      }
+    },
     startLogin() {
-      this.started = true;
+      this.checkLogin();
     },
   },
 };
@@ -86,6 +128,16 @@ export default {
   margin-bottom: 5.25em;
 
   line-height: 180%;
+}
+
+.errorStatus {
+  text-align: center;
+  padding: .25em 0;
+  margin-bottom: 1em;
+  font-family: 'Palanquin Dark', system-ui;
+  font-size: 1.25em;
+  color: #EB5757;
+  background-color: #FFEBEB;
 }
 
 .footnote-container {

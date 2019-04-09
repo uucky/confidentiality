@@ -46,6 +46,7 @@ export default {
   },
   mounted() {
     if (!this.$store.state.fruit) this.$router.push('/');
+    if (!this.$store.state.allowToAnswer) this.$router.push('/');
   },
 };
 </script>

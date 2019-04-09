@@ -7,16 +7,8 @@
       <p class="fruitName">
         {{ fruit }}
       </p>
-      <p
-        v-if="isLoggingIn"
-        class="loginStatus"
-        :class="{failure: status === 'failed'}"
-      >
-        {{ loginMsg[status] }}
-        {{ error }}
-      </p>
       <button
-        class="btn-regular"
+        class="btn-regular startBtn"
         @click="startQuestion"
       >
         OK
@@ -27,7 +19,6 @@
 </template>
 <script>
 import { getFruit } from '@/utils/randomFruits';
-import { auth } from '@/utils/firebase';
 
 export default {
   name: 'RandomFruit',
@@ -36,13 +27,6 @@ export default {
       fruit: '',
       uid: '',
       status: 'ready',
-      error: null,
-      isLoggingIn: false,
-      loginMsg: {
-        loggingIn: 'Logging in...',
-        failed: 'Bad Internet, try again?',
-        success: 'Successfully logged in.',
-      },
     };
   },
   mounted() {
@@ -52,26 +36,10 @@ export default {
     setFruit() {
       this.fruit = getFruit();
     },
-    async startQuestion() {
-      try {
-        this.status = 'loggingIn';
-        this.isLoggingIn = true;
-        await auth.signInAnonymously();
-        this.loggedIn = true;
-        auth.onAuthStateChanged((user) => {
-          if (user) {
-            this.$store.commit('SET_FRUIT', { fruit: this.fruit });
-            this.$store.commit('SET_UID', { uid: user.uid });
-          } else {
-            this.status = 'failed';
-            this.error = 'Not logged in.';
-          }
-        });
-        this.$router.push({ path: '/question' });
-      } catch (e) {
-        this.status = 'failed';
-        this.error = e.message;
-      }
+    startQuestion() {
+      this.$store.commit('SET_ALLOWTOANSWER', { status: true });
+      this.$store.commit('SET_FRUIT', { fruit: this.fruit });
+      this.$router.push({ path: '/question' });
     },
   },
 };
@@ -94,9 +62,13 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
 
-  padding: 1.25em;
-  width: 13.5625em;
-  height: 18.6875em;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+
+  padding: 3.375em 1.25em 2.15em;
+  height: 23.8125em;
+  width: 18.6875em;
   box-shadow: 0px 15px 16px rgba(0, 0, 0, 0.25);
   border-radius: .75em;
 }
@@ -108,6 +80,7 @@ export default {
 }
 
 .fruitName {
+  align-self: center;
   font-family: 'Palanquin Dark', system-ui;
   font-size: 2.25em;
   color: #EB5757;
@@ -126,6 +99,11 @@ export default {
     color: #EB5757;
     background-color: #FFEBEB;
   }
+}
+
+.startBtn {
+  align-self: center;
+  width: 12.5em;
 }
 
 </style>

@@ -2,17 +2,20 @@
   <div class="card">
     <div class="firstRow">
       <div class="avatar" />
-      <p class="username">
-        Said in Confidence
-      </p>
+      <div class="rightPart">
+        <p class="username">
+          Said in Confidence
+        </p>
+        <p class="time">
+          {{ convertedTime }}
+        </p>
+      </div>
     </div>
     <div class="secondRow">
       <p class="message">
-        Hi guys, <br><br>
         {{ message }}
       </p>
     </div>
-    <div class="thirdRow"></div>
   </div>
 </template>
 <script>
@@ -23,6 +26,43 @@ export default {
       type: String,
       default: 'Default msg',
     },
+    timestamp: {
+      type: Object,
+      default: () => ({
+        seconds: 1554804563,
+        nanoseconds: 762000000,
+      }),
+    },
+  },
+  computed: {
+    convertedTime() {
+      const { seconds, nanoseconds } = this.timestamp;
+      const newDate = new Date(seconds * 1000 + nanoseconds / 1000);
+      return this.timeElapsed(newDate);
+    },
+  },
+  methods: {
+    timeElapsed(origTime) {
+      const now = Date.now();
+      const origDate = new Date(origTime);
+      const elapsed = now - origDate;
+      let formatted = '';
+      if (elapsed < 60000) {
+        formatted = `${new Date(elapsed).getUTCSeconds()}s ago`;
+      } else if (elapsed < 3600000) {
+        formatted = `${new Date(elapsed).getUTCMinutes()}m ago`;
+      } else if (elapsed < 86400000) {
+        formatted = `${new Date(elapsed).getUTCHours()}h${new Date(elapsed).getUTCMinutes()}m ago`;
+      } else if (elapsed < 259200000) {
+        formatted = `${new Date(elapsed).getUTCDate()}d${new Date(elapsed).getUTCHours()}h ago`;
+      } else {
+        const options = {
+          year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false,
+        };
+        formatted = origDate.toLocaleString('en-CA', options).replace(',', '');
+      }
+      return formatted;
+    },
   },
 };
 </script>
@@ -31,21 +71,26 @@ export default {
   @apply bg-white w-full;
   display: flex;
   flex-flow: row wrap;
-  height: 20.875em;
+  /* height: 20.875em; */
   padding: 1em;
+  margin: 1em 0 0;
 }
 
 .firstRow {
   width: 100%;
+  height: 3.375em;
   display: flex;
   flex-flow: row nowrap;
+
+  & .rightPart {
+    margin-left: 1em;
+    padding: .5em 0 0;
+    display: flex;
+    flex-flow: row wrap;
+  }
 }
 
 .secondRow {
-  width: 100%;
-}
-
-.thirdRow {
   width: 100%;
 }
 
@@ -57,13 +102,20 @@ export default {
 
 .username {
   @apply text-fb-blue;
+  width: 100%;
   font-family: system-ui;
   font-weight: 600;
   font-size: .875em;
 }
 
+.time {
+  color: #9197A3;
+  font-size: .75rem;
+}
+
 .message {
-  font-family: system-ui;
+  padding: .5em 0 0;
+  font-family: 'Helvetica', system-ui;
   font-size: 1.625em;
 }
 </style>
