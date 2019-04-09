@@ -4,7 +4,7 @@ const { TEXT, SELECT } = types;
 
 const set2 = {
   q1: {
-    question: 'My relationship status is _______(single/taken/complicated/etc).',
+    question: 'My relationship status is _______ (single, taken, complicated, etc).',
     type: TEXT,
   },
   q2: {
@@ -84,7 +84,7 @@ const set2 = {
     },
   },
   q13: {
-    question: 'I think _______(male/female) should pay for a first date.',
+    question: 'I think _______(male / female) should pay for a first date.',
     type: TEXT,
   },
   q14: {

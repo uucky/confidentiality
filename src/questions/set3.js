@@ -93,7 +93,7 @@ const set3 = {
     options: {
       a: 'alone',
       b: 'with a roommate or friend',
-      c: 'with my family',
+      c: 'with family',
     },
   },
 
