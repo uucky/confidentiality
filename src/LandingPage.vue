@@ -4,7 +4,7 @@
       Take our survey.
     </h1>
     <p class="description">
-      If you take our beautiful cute survey we will give you some fresh treats! Please ask our staff for detail. We need to fill more sentences here so these.
+      This survey was conducted by a group of SIAT students for the purpose of improving the participant’s experience of filling in survey form. By doing this survey, you will help us to get a better understanding of participants' experience with the questions and how the survey is set up.
     </p>
     <p
       v-if="error"

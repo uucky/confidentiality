@@ -9,7 +9,7 @@ const set5 = {
     options: {
       a: 'share it with family and friends',
       b: 'bear it without telling anyone',
-      c: 'venting your anger to others',
+      c: 'vent your anger on others',
     },
   },
 
@@ -41,7 +41,7 @@ const set5 = {
   },
 
   q6: {
-    question: 'My favourite cultural/family tradition that I take part in is _______.',
+    question: 'My favourite cultural/ family tradition that I take part in is _______.',
     type: TEXT,
   },
 

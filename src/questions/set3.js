@@ -59,7 +59,7 @@ const set3 = {
   },
 
   q10: {
-    question: 'My preferred type of pet to have is ______.',
+    question: 'My preferred type of pet to have would be ______.',
     type: TEXT,
   },
 

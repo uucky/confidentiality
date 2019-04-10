@@ -11,7 +11,7 @@ const set2 = {
     question: 'My ideal partner should be _______.',
     type: SELECT,
     options: {
-      a: 'interesting enough',
+      a: 'intelligent',
       b: 'good-looking',
     },
   },
@@ -44,7 +44,7 @@ const set2 = {
     },
   },
   q7: {
-    question: 'The personality trait I value most in my partner is __________.',
+    question: 'The personality trait I value most in my partner is that they are __________.',
     type: TEXT,
   },
   q8: {
@@ -67,7 +67,7 @@ const set2 = {
     options: {
       a: 'higher than most',
       b: 'lower than most',
-      c: 'on average',
+      c: 'average',
     },
   },
   q11: {
@@ -101,7 +101,7 @@ const set2 = {
     type: SELECT,
     options: {
       a: 'having someone to confide in',
-      b: 'aequal effort',
+      b: 'equal effort',
       c: 'sex',
     },
   },

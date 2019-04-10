@@ -26,23 +26,17 @@ const set1 = {
   q4: {
     question: 'Out of the following, I would most hate to be called ______.',
     showcase: '<username> would most hate to be called <blank>.',
-    type: SELECT,
-    options: {
-      a: 'ordinary',
-      b: 'ignorant',
-      c: 'cowardly',
-      d: 'selfish',
-    },
+    type: TEXT,
   },
 
   q5: {
-    question: 'My biggest concern with my future career is _______ (failure, stress, etc.).',
+    question: 'My biggest concern with my future career is that _______ (failure, stress, etc.).',
     showcase: "<username>'s biggest concern about their future career is <blank>.",
     type: TEXT,
   },
 
   q6: {
-    question: 'A time where I used creativity to solve a problem is _______.',
+    question: 'A time where I used creativity to solve a problem was _______.',
     type: TEXT,
   },
 
@@ -86,14 +80,14 @@ const set1 = {
   },
 
   q13: {
-    question: 'In a group or team setting, the role I play is usually _______.',
+    question: 'In a group or team setting, the role I play is usually the one who _______.',
     type: SELECT,
     options: {
-      a: 'the one who does their part',
-      b: 'the one who relies on others to help',
-      c: 'the one who oversees everything',
-      d: 'the one who has to do someone elses part',
-      e: 'the one who doesnt show up to meetings',
+      a: 'does their part',
+      b: 'relies on others to help',
+      c: 'oversees everything',
+      d: 'has to do someone elses part',
+      e: 'doesnt show up to meetings',
     },
   },
 
