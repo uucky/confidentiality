@@ -9,7 +9,12 @@
     <p class="description">
       Well done finishing the questions. Now you can come to our staff and get your reward!
     </p>
-    <img src="assets/floorplan.jpg">
+    <div class="imageContainer">
+      <img
+        class="floorplan"
+        src="@/assets/floorplan.jpg"
+      >
+    </div>
   </div>
 </template>
 <script>
@@ -56,6 +61,17 @@ export default {
 
 .fruitName {
   color: #EB5757;
+}
+
+.imageContainer {
+  margin-top: 3em;
+}
+
+.floorplan {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center top;
 }
 
 </style>
