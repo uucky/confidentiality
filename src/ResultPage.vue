@@ -9,6 +9,7 @@
     <p class="description">
       Well done finishing the questions. Now you can come to our staff and get your reward!
     </p>
+    <img src="assets/floorplan.jpg">
   </div>
 </template>
 <script>
