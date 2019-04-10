@@ -41,7 +41,7 @@ export default {
       options: {
         1: 'Career',
         2: 'Romance',
-        3: 'Friend',
+        3: 'Friendship',
         4: 'Family',
         5: 'Miscellaneous',
       },
