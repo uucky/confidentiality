@@ -1,4 +1,4 @@
-<template functional>
+<template>
   <nav class="navContainer">
     <div class="rotateT">
       <span class="letterT">t</span>
@@ -7,14 +7,31 @@
       class="mockInput"
       placeholder="Search..."
     >
-    <button class="mockBtn">
+    <button
+      class="mockBtn"
+      @click="getCount"
+    >
       Go
     </button>
   </nav>
 </template>
 <script>
+import { answerCollection } from '@/utils/firebase';
+
 export default {
   name: 'Navbar',
+  data() {
+    return {
+      count: null,
+    };
+  },
+  methods: {
+    getCount() {
+      answerCollection.get().then((querySnapshot) => {
+        console.info(querySnapshot.size);
+      });
+    },
+  },
 };
 </script>
 <style lang="postcss" scoped>
